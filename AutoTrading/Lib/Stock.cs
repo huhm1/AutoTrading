@@ -108,7 +108,7 @@ namespace AutoTrading.Lib
             DataFromFile = false;
 
             ReqHistoricalInterval = interval;
-            string fileNameStr = contract.Symbol + "_" + interval.Seconds + ".csv";
+            string fileNameStr = contract.Symbol + "_" + interval.TotalSeconds + ".csv";
 
             if (File.Exists(Client.FilePath + fileNameStr))
             {
@@ -235,7 +235,7 @@ namespace AutoTrading.Lib
         private void LoadHistoricalData(string fileNameStr)
         {
             LoadDataWH.WaitOne();
-            OleDbConnection ExcelConnection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Client.FilePath + "; Extended Properties='Text;HDR=No;FMT=Delimited'");
+            OleDbConnection ExcelConnection = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Client.FilePath + "; Extended Properties='Text;HDR=No;FMT=Delimited'");
             OleDbCommand ExcelCommand = new OleDbCommand(@"SELECT * FROM " + fileNameStr, ExcelConnection);
             OleDbDataReader reader;
 

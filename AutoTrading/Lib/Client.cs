@@ -9,9 +9,9 @@ namespace AutoTrading.Lib
     public static class Client
     {
         public static EventWaitHandle OrderIDWH = new EventWaitHandle(true, EventResetMode.ManualReset);
-        public static string FilePath = @".\..\Data\";
+        public static string FilePath = @".\..\..\Data\";
 
-        public static string StrategyPath = @".\..\Data\Strategy\";
+        public static string StrategyPath = @".\..\..\Data\Strategy\";
 
         public static EClientSocket Socket;
         public static EW ew =new EW();

@@ -14,7 +14,7 @@ namespace AutoTrading.Lib
 
         //TimeSpan LongPeriod = new TimeSpan(3,15,0);
         TimeSpan LongPeriod = TimeSpan.FromDays(1);
-        TimeSpan ShortPeriod = TimeSpan.FromMinutes(1);
+        TimeSpan ShortPeriod = TimeSpan.FromMinutes(30);
         private Logs Result;
         private Logs TradeRecord;
         /// <summary>
@@ -28,11 +28,11 @@ namespace AutoTrading.Lib
 
         public StrategySample()
         {
-            name = "Test";
-            CreateContract("MSFT");
+            name = "StrategySample";
+            CreateContract("AAPL");
             Load();
 #if Test
-            TradeRecord = new Logs("Test_" + contract.Symbol + "_T.txt", true);
+            TradeRecord = new Logs(name + "_" + contract.Symbol + "_Trades.txt", true);
 #else
             TradeRecord = new Logs(contract.m_symbol + "_T.txt", true);
 #endif
@@ -40,8 +40,8 @@ namespace AutoTrading.Lib
             marketStartTime = new TimeSpan(9, 30, 0); //9:30
             marketEndTime = new TimeSpan(16, 0, 0);
 
-            tradeStartTime = new TimeSpan(9, 31, 30);
-            tradeEndTime = new TimeSpan(15, 58, 30);
+            tradeStartTime = new TimeSpan(9, 40, 00);
+            tradeEndTime = new TimeSpan(15, 55, 00);
 
             historySpanDays = TimeSpan.FromDays(200); ///////////////
 
@@ -117,7 +117,7 @@ namespace AutoTrading.Lib
         protected void Load()
         {
             string fileNameStr = name + "_Strategy.csv";
-            OleDbConnection ExcelConnection = new OleDbConnection(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Client.StrategyPath + @"; Extended Properties='Text;HDR=No;FMT=Delimited'");
+            OleDbConnection ExcelConnection = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + Client.StrategyPath + @"; Extended Properties='Text;HDR=No;FMT=Delimited'");
             OleDbCommand ExcelCommand = new OleDbCommand(@"SELECT * FROM " + fileNameStr, ExcelConnection);
             OleDbDataReader reader;
 
@@ -127,9 +127,9 @@ namespace AutoTrading.Lib
                 reader = ExcelCommand.ExecuteReader();
                 if (reader.Read())
                 {
-                    Cash = (Double)reader[0];
-                    HoldSize = (Int32)reader[1];
-                    K = (Double)reader[2];
+                    Cash = Convert.ToDouble(reader[0]);
+                    HoldSize = Convert.ToDecimal(reader[1]);
+                    K = Convert.ToDouble(reader[2]);
                     ColseAtEnd = Convert.ToBoolean(reader[3]);
                 }
 
