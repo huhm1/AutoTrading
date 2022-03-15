@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
+using AutoTrading.Strategies;
 using IBApi;
 
 namespace AutoTrading.Lib

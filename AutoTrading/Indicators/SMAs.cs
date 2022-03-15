@@ -1,7 +1,8 @@
+using AutoTrading.Lib;
 using System;
 using System.Collections.Generic;
 
-namespace AutoTrading.Lib
+namespace AutoTrading.Indicators
 {
     class SMAs:Indicator
     {

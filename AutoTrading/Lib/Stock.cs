@@ -285,6 +285,7 @@ namespace AutoTrading.Lib
         public void HistoricalData(DateTime date, double open, double high, double low, double close, decimal volume)
         {
             PriceDateTime = date - ReqHistoricalInterval;
+            //Skip untrusted spike
             if (high - low > open * 0.008)
                 return;
             if (AfterPriceUpdate != null)
@@ -335,6 +336,7 @@ namespace AutoTrading.Lib
         public static void UpdatePrice(int reqId, int tickType, double price, TickAttrib attribs)
         {
             //PriceDateTime = DateTime.Now;
+            //Skip untrusted price
             if (price <= 0.9)
                 return;
             Stock stock = StockList[reqId];

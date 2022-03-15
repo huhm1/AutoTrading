@@ -96,11 +96,13 @@
     <Compile Include="Lib\Point.cs" />
     <Compile Include="Lib\Portfolio.cs" />
     <Compile Include="Lib\Stock.cs" />
+    <Compile Include="Strategies\StrategyNewTest.cs" />
     <Compile Include="Strategies\StrategySample.cs" />
     <Compile Include="Lib\Strategy.cs" />
     <Compile Include="Lib\SubAccount.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Strategies\StrategyTestcnOK2.cs" />
     <EmbeddedResource Include="Forms\AutoTrading.resx">
       <DependentUpon>AutoTrading.cs</DependentUpon>
       <SubType>Designer</SubType>

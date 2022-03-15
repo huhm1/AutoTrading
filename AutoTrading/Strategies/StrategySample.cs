@@ -1,25 +1,23 @@
 #define Test
+using AutoTrading.Indicators;
+using AutoTrading.Lib;
 using System;
 using System.Collections.Generic;
 using System.Data.OleDb;
 using System.Threading;
-using IBApi;
 
-namespace AutoTrading.Lib
+namespace AutoTrading.Strategies
 {
     class StrategySample : Strategy
     {
         public int np = 0;
+        /// K is a base rate
         private Double K = 0.12;
 
-        //TimeSpan LongPeriod = new TimeSpan(3,15,0);
         TimeSpan LongPeriod = TimeSpan.FromDays(1);
         TimeSpan ShortPeriod = TimeSpan.FromMinutes(30);
         private Logs Result;
         private Logs TradeRecord;
-        /// <summary>
-        /// K is a base rate
-        /// </summary>
 
         private DateTime PeriodTimeStamp = DateTime.MinValue;
         double PeriodHigh = 0, PeriodLow = double.MaxValue;
@@ -43,7 +41,7 @@ namespace AutoTrading.Lib
             tradeStartTime = new TimeSpan(9, 40, 00);
             tradeEndTime = new TimeSpan(15, 55, 00);
 
-            historySpanDays = TimeSpan.FromDays(200); ///////////////
+            historySpanDays = TimeSpan.FromDays(5); ///////////////
 
             tickerID = Client.TickerID;
             stock = new Stock(this, tickerID, contract, historySpanDays, marketStartTime, marketEndTime);
@@ -56,7 +54,7 @@ namespace AutoTrading.Lib
             Ready = false;
 #endif
             stock.AfterPriceUpdate += Decision;
-            Thread t = new Thread(delegate () { stock.ReqData(TimeSpan.FromSeconds(15)); });
+            Thread t = new Thread(delegate () { stock.ReqData(TimeSpan.FromSeconds(30)); });
             t.Start();
 
 #if !Test
